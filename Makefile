@@ -26,4 +26,8 @@ $(TARGET): $(OBJS)
 
 # Limpar arquivos de compilação
 clean:
-	rm -f $(OBJS) $(TARGET)
+	$(RM) $(OBJS) $(TARGET)
+
+# Regra para rodar o programa
+run: $(TARGET)
+	./$(TARGET)
