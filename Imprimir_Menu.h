@@ -22,6 +22,7 @@ typedef enum{
 void imprimir_menu(int idpedido);
 cardapio string_para_prato(const char *nome);
 const char* obter_nome_do_prato(cardapio prato_id);
+void impressao_do_menu();
 
 
 

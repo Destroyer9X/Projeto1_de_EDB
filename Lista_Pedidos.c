@@ -1,5 +1,5 @@
 #include "lista_pedidos.h"
-
+#include "Imprimir_Menu.h"
 
 
 void inicializar(pendente **lista) {
@@ -13,13 +13,16 @@ void adicionar(pendente **lista, int valor) {
     *lista = novo;
 };
 
-void lista_pendente( pendente *lista) {
-     pendente *atual = lista;
+void lista_pendente(pendente *lista) {
+    pendente *atual = lista;
     while (atual != NULL) {
-        printf("%d\n", atual->valor);
+        // Converte o valor para o nome do prato usando a função obter_nome_do_prato
+        const char* nome_do_prato = obter_nome_do_prato(atual->valor);
+        printf("%s\n", nome_do_prato);
         atual = atual->proximo;
     }
-};
+}
+
 
 void remover(pendente **lista, int valor) {
     pendente *atual = *lista;
