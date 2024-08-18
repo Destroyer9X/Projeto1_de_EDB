@@ -3,9 +3,15 @@
 #include "Fila.h"
 
 #include <string.h>
-#include <ctype.h>  // Necessário para tolower
+#include <ctype.h>  //Necessário para tolower.
 
-void impressao_do_menu() {
+/**
+ * @brief Imprime o menu completo do restaurante.
+ * 
+ * A função `impressao_do_menu` exibe uma mensagem de boas-vindas ao restaurante e, em seguida,
+ * imprime o cardápio completo, dividido em categorias como entradas, pratos principais e sobremesas.
+ */
+void impressao_do_menu(){
     printf(" _____________________________________________\n");
     printf("< Olá, bem-vindo ao restaurante Hack 'n' Cheese >\n");
     printf(" -----------------------------------------------\n");
@@ -24,8 +30,18 @@ void impressao_do_menu() {
     printf("\t1. Tiramisu.\n\t2. Cheesecake de Frutas Vermelhas.\n\t3. Mousse de Chocolate.\n\t4. Pudim de Leite.\n\t5. Sorvete de Baunilha com Calda de Morango.\n\n\n");
 }
 
-cardapio string_para_prato(const char* nome_do_prato) {
-    // Criar uma cópia da string original em minúsculas
+/**
+ * @brief Converte o nome de um prato em uma constante do tipo `cardapio`.
+ * 
+ * @param nome_do_prato A string que representa o nome do prato.
+ * @return Um valor do tipo `cardapio` correspondente ao nome fornecido. Retorna -1 se o prato não for encontrado.
+ * 
+ * A função `string_para_prato` converte uma string representando o nome de um prato em minúsculas e
+ * compara com os nomes dos pratos disponíveis. Se encontrar uma correspondência, retorna o valor do
+ * enum `cardapio` correspondente; caso contrário, retorna -1.
+ */
+cardapio string_para_prato(const char* nome_do_prato){
+    //Criar uma cópia da string original em minúsculas.
     char nome_minusculo[100];
     int i = 0;
 
@@ -33,7 +49,7 @@ cardapio string_para_prato(const char* nome_do_prato) {
         nome_minusculo[i] = tolower(nome_do_prato[i]);
         i++;
     }
-    nome_minusculo[i] = '\0';  // Finalizar a string
+    nome_minusculo[i] = '\0';  //Finalizar a string.
 
     // Comparar a string convertida
     if (strcmp(nome_minusculo, "sopa de cebola") == 0) return SOPA_DE_CEBOLA;
@@ -52,11 +68,20 @@ cardapio string_para_prato(const char* nome_do_prato) {
     if (strcmp(nome_minusculo, "pudim de leite") == 0) return PUDIM_DE_LEITE;
     if (strcmp(nome_minusculo, "sorvete de baunilha com calda de morango") == 0) return SORVETE_DE_BAUNILHA_COM_CALDA_DE_MORANGO;
 
-    // Se não encontrar o prato, retornar um valor inválido
+    //Se não encontrar o prato, retornar um valor inválido.
     return -1;
 }
 
-const char* nome_do_prato(cardapio prato) {
+/**
+ * @brief Retorna o nome de um prato com base no valor do enum `cardapio`.
+ * 
+ * @param prato O valor do enum `cardapio` representando o prato.
+ * @return Uma string constante com o nome do prato.
+ * 
+ * A função `nome_do_prato` retorna uma string com o nome do prato correspondente ao valor do enum
+ * `cardapio` fornecido. É usada para exibir o nome do prato em vez do número ou valor do enum.
+ */
+const char* nome_do_prato(cardapio prato){
     switch (prato) {
         case SOPA_DE_CEBOLA: return "Sopa de Cebola";
         case SALADA_CAESAR: return "Salada Caesar";
@@ -77,14 +102,23 @@ const char* nome_do_prato(cardapio prato) {
     }
 }
 
-void pedido_finalizado(pedidos_processando *fila) {
+/**
+ * @brief Exibe uma mensagem indicando que os pedidos na fila foram finalizados.
+ * 
+ * @param fila Um ponteiro para a estrutura `pedidos_processando` representando a fila de pedidos em processamento.
+ * 
+ * A função `pedido_finalizado` percorre a fila de pedidos, obtém o nome de cada prato,
+ * e imprime uma mensagem indicando que o pedido foi finalizado. Esta função também 
+ * exibe uma mensagem de agradecimento ao cliente.
+ */
+void pedido_finalizado(pedidos_processando *fila){
 
     printf("\n╔════════════════════════════════════════════╗\n");
     printf("║              PEDIDOS FINALIZADOS!          ║\n");
     printf("╠════════════════════════════════════════════╣\n");
 
-    while (fila) {
-        // Obter o nome do prato para o ID atual
+    while (fila){
+        //Obter o nome do prato para o ID atual.
         const char* nome_do_prato = obter_nome_do_prato(fila->pedidos);
         printf("║ %-40s   ║\n", nome_do_prato);
         fila = fila->proximo;
@@ -93,6 +127,16 @@ void pedido_finalizado(pedidos_processando *fila) {
     printf("╚════════════════════════════════════════════╝\n");
     printf("\nObrigado por aguardar. Aqui estão os seus pratos! Tenha um bom apetite!\n");
 }
-const char* obter_nome_do_prato(cardapio prato_id) {
+
+/**
+ * @brief Retorna o nome de um prato com base no ID do prato.
+ * 
+ * @param prato_id O ID do prato do tipo `cardapio`.
+ * @return Uma string constante com o nome do prato.
+ * 
+ * A função `obter_nome_do_prato` chama a função `nome_do_prato` para converter o ID do prato
+ * em uma string legível com o nome do prato. É uma função auxiliar para facilitar a obtenção do nome.
+ */
+const char* obter_nome_do_prato(cardapio prato_id){
     return nome_do_prato(prato_id);
 }
