@@ -9,9 +9,21 @@ void inicializar(pendente **lista) {
 void adicionar(pendente **lista, int valor) {
     pendente *novo = (pendente*) malloc(sizeof(pendente));
     novo->valor = valor;
-    novo->proximo = *lista;
-    *lista = novo;
-};
+    novo->proximo = NULL;
+
+    if (*lista == NULL) {
+        // Se a lista estiver vazia, o novo pedido é o primeiro
+        *lista = novo;
+    } else {
+        // Encontrar o último nó da lista
+        pendente *atual = *lista;
+        while (atual->proximo != NULL) {
+            atual = atual->proximo;
+        }
+        // Adiciona o novo pedido no final
+        atual->proximo = novo;
+    }
+}
 
 void lista_pendente(pendente *lista) {
     pendente *atual = lista;
@@ -21,7 +33,7 @@ void lista_pendente(pendente *lista) {
         printf("%s\n", nome_do_prato);
         atual = atual->proximo;
     }
-}
+};
 
 
 void remover(pendente **lista, int valor) {
@@ -53,10 +65,4 @@ void remover(pendente **lista, int valor) {
     free(atual);
     printf("O pedido %d foi removido com sucesso!\n", valor);
 }
-
-void processar(pendente **lista) {
-   
-};
-
-
 

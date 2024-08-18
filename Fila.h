@@ -1,18 +1,14 @@
 #ifndef FILA_H
 #define FILA_H
+#include "Lista_Pedidos.h"
 
-// Estrutura da fila de pedidos
-typedef struct Pedidos_processando pedidos_processando;
+typedef struct Pedidos_processando {
+    int pedidos;  // Substitua por um tipo adequado se necessário
+    struct Pedidos_processando *proximo;
+} pedidos_processando;
 
-// Estrutura da lista ligada (que estará no arquivo lista.c)
-typedef struct NoLista {
-    int numero;
-    struct NoLista *proximo;
-} NoLista;
-
-// Funções
-void inserir_nos_pedidos(pedidos_processando **fila, int num);
+void inserir_da_lista_para_fila(pendente *lista, pedidos_processando **fila);
 void listarprocessamento(pedidos_processando *fila);
-void inserir_da_lista_para_fila(NoLista *lista, pedidos_processando **fila);
+void pedido_finalizado(pedidos_processando *fila);
 
-#endif
+#endif // FILA_H

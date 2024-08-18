@@ -1,6 +1,7 @@
 #ifndef IMPRIMIR_MENU_H
 #define IMPRIMIR_MENU_H
- 
+#include "Fila.h"
+
 typedef enum{
     SOPA_DE_CEBOLA,
     SALADA_CAESAR,
@@ -23,7 +24,7 @@ void imprimir_menu(int idpedido);
 cardapio string_para_prato(const char *nome);
 const char* obter_nome_do_prato(cardapio prato_id);
 void impressao_do_menu();
-
+void pedido_finalizado(pedidos_processando *fila); 
 
 
 #endif

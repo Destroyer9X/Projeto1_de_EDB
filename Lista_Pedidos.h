@@ -4,18 +4,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-struct Lista_ligada {
-   int valor ; 
+// Definição da estrutura da lista ligada
+typedef struct Lista_ligada {
+   int valor; 
    struct Lista_ligada *proximo;
+} pendente;
 
-};
-
-typedef struct Lista_ligada pendente;
-
-void inicializar(pendente ** lista);
-void adicionar(pendente ** lista, int valor);
-void lista_pendente(pendente * lista);
-void remover(pendente ** lista, int idPedido);
+// Funções
+void inicializar(pendente **lista);
+void adicionar(pendente **lista, int valor);
+void lista_pendente(pendente *lista);
+void remover(pendente **lista, int idPedido);
 void processar(pendente **lista);
 
 #endif
